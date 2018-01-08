@@ -1,0 +1,55 @@
+{include file='public/head'}
+<body>
+    <div class="x-body" >
+    <fieldset class="layui-elem-field">
+          <legend>采购商品</legend>
+          <div class="layui-field-box">
+        <button  onclick="javascript:window.location.href = '{:url("admin/purchase/purchaseList")}'" class="layui-btn layui-btn-small x-right">
+        <i class="layui-icon" style="font-size: 30px; ">&#xe65c;</i>返回  
+        </button>
+         <button onclick="javascript:location.reload()" class="layui-btn layui-btn-small x-right">刷新</button>
+           <table class="layui-table">
+        <thead>
+          <tr>
+            <!-- <th>
+              <div class="header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th> -->
+            <th>序号</th>
+            <th>品名规格</th>
+            <th>单位</th>
+            <th>货品类别</th>
+            <th>数量</th>
+            <th>进货价</th>
+            <th>金额</th>
+        </thead>
+        <tbody>
+
+        {volist name="lists" key='key' id="vo"}
+          <tr>
+              <!-- <td>
+                <div class="layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+              </td> -->
+              <td>{$key}</td>
+              <td>{$vo.name}</td>
+              <td>{$vo.unit}</td>
+              <td>{$vo.type}</td>
+              <td>
+                {$vo.num}
+              </td>
+              <td>{$vo.price}</td>
+              <td>{$vo.price*$vo.num}</td>
+          </tr>
+        {/volist}
+       
+        </tbody>
+      </table>
+          <div class="page">
+            <div>
+               {$lists->render()}
+            </div>
+          </div>
+          </div>
+    </fieldset>
+    </div>
+</body>
+{include file="public/foot"}

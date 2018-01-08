@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>LotusAdmin</title>
+<link rel="stylesheet" type="text/css" href="__css__/style.css" tppabs="css/style.css" />
+<meta name="description" content="lotusadmin">
+
+<style>
+body{
+	height:100%;
+	background-image: url(__images__/bg.jpg);
+	overflow:hidden;
+}
+canvas{
+	z-index:-1;
+	position:absolute;
+}
+</style>
+<script src="__js__/jquery.min.js"></script>
+<script src="__module__/layer/layer.js"></script>
+
+</head>
+<body>
+
+<dl class="admin_login">
+ <dt>
+  <strong>米瑞科尔ERP系统</strong>
+  <em></em>
+ </dt>
+ <dd class="user_icon">
+  <input type="text" name="username" id='username' placeholder="账号" class="login_txtbx"/>
+ </dd>
+ <dd class="pwd_icon">
+  <input type="password" name="password"  id="password" placeholder="密码" class="login_txtbx"/>
+ </dd>
+ 
+<!--  <dd class="val_icon">
+  <div class="checkcode">
+    <input type="text" name="username"  id="J_codetext" placeholder="验证码" maxlength="4" class="login_txtbx">
+    <canvas class="J_codeimg" id="myCanvas" onclick="createCode()">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+  </div>
+  <input type="button" value="验证码核验" class="ver_btn" onClick="validate();">
+ </dd> -->
+ <dd>
+  <button id="bs" onclick="login()" type="button"  value="立即登陆" class="submit_btn"/>登录</button>
+ </dd>
+ <dd>
+  <p></p>
+  <p></p>
+ </dd>
+</dl>
+</body>
+<script>
+function login(){
+	var username  = $('#username').val();
+	var password  = $('#password').val();
+	if (username == '') {
+		layer.msg('用户名不能为空!', {icon:1}) ;
+		return false;
+	}
+	if (password == '') {
+		layer.msg('密码不能为空!', {icon:1}) ;
+		return false;
+	}
+	$.ajax({
+	url: 'login',
+	type: 'post',
+	dataType: 'json',
+	data:{username: username,password:password}, })
+	.done(function(data){
+		if(data.code==0){
+			layer.msg(data.msg,{});
+		}else{
+			layer.msg(data.msg,{icon:1,offset:'t'},function(){
+				location.href = data.url;
+			});
+			
+		}
+	})
+}
+document.onkeydown = function(e){ 
+    var ev = document.all ? window.event : e;
+    if(ev.keyCode==13) {
+          login();
+     }
+}
+
+
+</script>
+</html>

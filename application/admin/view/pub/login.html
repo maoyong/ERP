@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>LotusAdmin</title>
+<link rel="stylesheet" type="text/css" href="__css__/style.css" tppabs="css/style.css" />
+<meta name="keywords" content="{$Think.config.site.keywords}">
+<meta name="description" content="{$Think.config.site.keywords}">
+
+<style>
+body{
+	height:100%;
+	background-image: url(__images__/bg.jpg);
+	overflow:hidden;
+}
+canvas{
+	z-index:-1;
+	position:absolute;
+}
+</style>
+
+</head>
+<body>
+ <form class="form form-horizontal" action="{:\\think\\Url::build('checkLogin')}" method="post" name="form" id="form">
+<dl class="admin_login">
+ <dt>
+  <strong>{$Think.config.site.title}</strong>
+  <em></em>
+ </dt>
+ <dd class="user_icon">
+  <input type="text" name="username" id='username' placeholder="账号" class="login_txtbx"/>
+ </dd>
+ <dd class="pwd_icon">
+  <input type="password" name="password"  id="password" placeholder="密码" class="login_txtbx"/>
+ </dd>
+ <dd>
+  <button id="bs" onclick="login()" type="button"  value="立即登陆" class="submit_btn"/>登录</button>
+ </dd>
+ <dd>
+  <p></p>
+  <p></p>
+ </dd>
+</dl>
+</form>
+</body>
+<script type="text/javascript" src="__module__/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__module__/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__module__/Validform/5.3.2/Validform.min.js"></script>
+<script>
+function login(){
+	var username  = $('#username').val();
+	var password  = $('#password').val();
+	if (username == '') {
+		layer.msg('用户名不能为空!', {icon:1}) ;
+		return false;
+	}
+	if (password == '') {
+		layer.msg('密码不能为空!', {icon:1}) ;
+		return false;
+	}
+	$.ajax({
+	url: 'checkLogin',
+	type: 'post',
+	dataType: 'json',
+	data:{username: username,password:password}, })
+	.done(function(data){
+		if(data.code==0){
+			layer.msg(data.msg,{icon:1,offset:'t'},function(){
+				location.href = '{$Request.get.callback ?: \\think\\Url::build("Index/index")}';
+			});
+			
+		}else{
+			layer.msg(data.msg,{});
+		}
+	})
+}
+document.onkeydown = function(e){ 
+    var ev = document.all ? window.event : e;
+    if(ev.keyCode==13) {
+          login();
+     }
+}
+
+
+</script>
+</html>

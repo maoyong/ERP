@@ -1,0 +1,75 @@
+{include file='public/head'}
+
+<body>
+    <div class="x-body" >
+    <button class="layui-btn layui-btn-small " onclick="x_admin_show('添加采购单','add.html',$('.x-body').width(),550)"></i>添加采购单</button>
+    <button onclick="javascript:location.reload()" class="layui-btn layui-btn-small">刷新</button>
+    <span class="x-right" style="line-height:40px">共有数据:{$lists->count()}</span>
+    <table class="layui-table">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>采购单号</th>
+            <th>添加时间</th>
+            <th>添加人</th>
+            <th>状态</th>
+            <th>操作</th>
+        </thead>
+        <tbody>
+            {volist name="lists" key='key' id="vo"}
+                <tr>
+                    <td>{$key}</td>
+                    <td>{$vo.order_sn}</td>
+                    <td>{$vo.create_time|date='Y-m-d',###}</td>
+                    <td>
+                       {$vo.username}
+                    </td>
+                    <td>
+                       {$vo.status}
+                    </td>
+                    <td>
+                        <a type="button" href="goodsList.html?id={$vo.id})}" class="layui-btn layui-btn-mini">
+                            <i class="layui-icon" style="font-size: 30px; ">&#xe63c;</i>
+                            进入采购单
+                        </a>
+                        <button type="button" onclick="x_admin_show('编辑应用',
+                        'show_edit_app.html?id={$vo.id}',500,300)" class="layui-btn layui-btn-mini">编辑
+                        </button>
+                        <a type="button" onClick="delete_app({$vo.id})" class="layui-btn layui-btn-mini layui-btn-danger">删除</button>
+                    </td>
+                </tr>
+            {/volist}
+        </tbody>
+    </table>
+        <div class="page">
+          <div>
+            {$lists->render()}
+          </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function delete_app(id){
+        layer.confirm('确定要删除吗?',{
+          btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url: 'delete_app',
+                type: 'post',
+                dataType: 'json',
+                data: {id:id},
+            })
+            .done(function(data){
+                if(data.code==0){
+                    layer.msg(data.msg,{icon:5,time:500});
+                }else{
+                    layer.msg(data.msg,{icon:1,time:500},function(){
+                        location.reload();
+                    })
+                }
+            })
+        });
+    }    
+</script>
+{include file="public/foot"}

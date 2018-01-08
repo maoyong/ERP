@@ -1,0 +1,7 @@
+.idea
+composer.lock
+*.log
+.user.ini
+.htaccess
+404.html
+.well-known
