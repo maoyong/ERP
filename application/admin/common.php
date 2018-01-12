@@ -23,6 +23,18 @@ if (!function_exists('curl_file_create')) {
 }
 
 /**
+ * 模拟tab产生空格
+ * @param int $step
+ * @param string $string
+ * @param int $size
+ * @return string
+ */
+function tab($step = 1, $string = ' ', $size = 4)
+{
+    return str_repeat($string, $size * $step);
+}
+
+/**
  * flash message
  *
  * flash("?KEY") 判断是否存在flash message KEY 返回bool值

@@ -89,11 +89,11 @@ class auth extends Controller
         }else{
             $p_title = '顶级菜单';
         }
-        $this->assign('p_title',$p_title);
+        $this->view->assign('p_title',$p_title);
         $data  =   Db::name('auth_rule')
             ->where('id',$id)
             ->find();
-        return  $this->fetch('edit',['data'=>$data]);
+        return  $this->view->fetch('edit',['data'=>$data]);
     }
     function edit(){
         $post =  $this->request->post();

@@ -61,6 +61,7 @@ class Controller
         }
         // 用户ID
         defined('UID') or define('UID', Session::get(Config::get('auth.user_auth_key')));
+        defined('GID') or define('GID', Session::get('group_id'));
         // 是否是管理员
         defined('ADMIN') or define('ADMIN', true === Session::get(Config::get('auth.admin_auth_key')));
         // 检查认证识别号
@@ -228,8 +229,7 @@ class Controller
         $url = strtolower($url);
         if (!in_array($url, $not_check)) {
             $auth     = new Auth();
-            $admin_id = Session::get('user_id');
-            if (!$auth->check($url, $admin_id) && $admin_id != 1) {
+            if (!$auth->check($url, UID) && UID != 1) {
                 $this->error('没有权限',"{$module}/{$controller}/index");
             }
         }

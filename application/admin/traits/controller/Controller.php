@@ -52,11 +52,9 @@ trait Controller
     public function add()
     {
         $controller = $this->request->controller();
-
         if ($this->request->isAjax()) {
             // 插入
             $data = $this->request->except(['id']);
-
             // 验证
             if (class_exists($validateClass = Loader::parseClass(Config::get('app.validate_path'), 'validate', $controller))) {
                 $validate = new $validateClass();
@@ -64,7 +62,6 @@ trait Controller
                     return ajax_return_adv_error($validate->getError());
                 }
             }
-
             // 写入数据
             if (
                 class_exists($modelClass = Loader::parseClass(Config::get('app.model_path'), 'model', $this->parseCamelCase($controller)))
@@ -154,7 +151,6 @@ trait Controller
             if (!$vo) {
                 throw new HttpException(404, '该记录不存在');
             }
-
             $this->view->assign("vo", $vo);
 
             return $this->view->fetch();

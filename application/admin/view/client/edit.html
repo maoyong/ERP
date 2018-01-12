@@ -5,69 +5,97 @@
     <form class="form form-horizontal" id="form" method="post" action="{:\\think\\Request::instance()->baseUrl()}">
         <input type="hidden" name="id" value="{$vo.id ?? ''}">
         <div class="row cl">
-            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>产品代码：</label>
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>客户代码：</label>
             <div class="formControls col-xs-6 col-sm-6">
-                <input type="text" class="input-text" value="{$vo.goods_no ?? ''}" placeholder="" name="goods_no" datatype="*" nullmsg="请填写产品代码">
+                <input type="text" class="input-text" value="{$vo.client_no ?? ''}" placeholder="" name="client_no" datatype="*" nullmsg="请填写客户代码">
             </div>
             <div class="col-xs-3 col-sm-3"> </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>商品名称：</label>
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>客户名称：</label>
             <div class="formControls col-xs-6 col-sm-6">
-                <input type="text" class="input-text" value="{$vo.name ?? ''}" placeholder="" name="name" datatype="*" nullmsg="请填写商品名称">
+                <input type="text" class="input-text" value="{$vo.client_name ?? ''}" placeholder="" name="client_name" datatype="*" nullmsg="请填写客户名称">
             </div>
             <div class="col-xs-3 col-sm-3"> </div>
         </div>
          <div class="row cl">
-            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>品牌：</label>
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>联系地址：</label>
             <div class="formControls col-xs-6 col-sm-6">
-                <input type="text" class="input-text" value="{$vo.brand ?? ''}" placeholder="" name="brand" datatype="*" nullmsg="请填写品牌">
+                <input type="text" class="input-text" value="{$vo.address ?? ''}" placeholder="" name="address" datatype="*" nullmsg="请填写联系地址">
+            </div>
+            <div class="col-xs-3 col-sm-3"> </div>
+        </div>
+         
+         <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>联系电话：</label>
+            <div class="formControls col-xs-6 col-sm-6">
+                <input type="text" class="input-text" value="{$vo.tel ?? ''}" placeholder="" name="tel" datatype="*" nullmsg="请填写商品名称">
+            </div>
+            <div class="col-xs-3 col-sm-3"> </div>
+        </div>
+      <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>纳税人识别号：</label>
+            <div class="formControls col-xs-6 col-sm-6">
+                <input type="text" class="input-text" value="{$vo.ident_no ?? ''}" placeholder="" name="ident_no" datatype="*" nullmsg="请填写纳税人识别号">
             </div>
             <div class="col-xs-3 col-sm-3"> </div>
         </div>
          <div class="row cl">
-            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>计量单位：</label>
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>开户地址</label>
             <div class="formControls col-xs-6 col-sm-6">
-             <select class="select" name="unit">
-                    {volist name='units' id='list'}
-                    <option value="{$list.id}" {if condition="isset($vo['unit']) AND $list['id'] eq $vo['unit']"}selected{/if}>{$list.name}</option>
-                    {/volist}
-                </select>
+                <input type="text" class="input-text" value="{$vo['bank']['bank_address'] ?? ''}" placeholder="" name="bank_address" datatype="*" nullmsg="请填写开户行">
             </div>
             <div class="col-xs-3 col-sm-3"> </div>
         </div>
          <div class="row cl">
-            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>规格型号：</label>
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>开户手机号</label>
             <div class="formControls col-xs-6 col-sm-6">
-                <input type="text" class="input-text" value="{$vo.model ?? ''}" placeholder="" name="model" datatype="*" nullmsg="请填写商品名称">
+                <input type="text" class="input-text" value="{$vo['bank']['bank_tel'] ?? ''}" placeholder="" name="bank_tel" datatype="*" nullmsg="请填写开户行">
             </div>
             <div class="col-xs-3 col-sm-3"> </div>
         </div>
          <div class="row cl">
-            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>库存：</label>
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>开户行</label>
             <div class="formControls col-xs-6 col-sm-6">
-                <input type="text" class="input-text" value="{$vo.repertory ?? ''}" placeholder="" name="repertory" datatype="*" nullmsg="请填写库存">
+                <input type="text" class="input-text" value="{$vo['bank']['bank_name'] ?? ''}" placeholder="" name="bank_name" datatype="*" nullmsg="请填写开户行">
+                <input type="hidden" name="bank_id" value="{$vo['bank']['id'] ?? ''}">
             </div>
             <div class="col-xs-3 col-sm-3"> </div>
         </div>
-        <div class="row cl">
-            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>排序：</label>
+         <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>账户：</label>
             <div class="formControls col-xs-6 col-sm-6">
-                <input type="number" class="input-text" value="{$vo.sort ?? '50'}" placeholder="" name="sort" datatype="*" nullmsg="请填写排序">
+                <input type="text" class="input-text" value="{$vo['bank']['bank_no'] ?? ''}" placeholder="" name="bank_no" datatype="*" nullmsg="请填写账户">
             </div>
             <div class="col-xs-3 col-sm-3"> </div>
         </div>
-        <div class="row cl">
-            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>状态：</label>
-            <div class="formControls col-xs-6 col-sm-6 skin-minimal">
-                <div class="radio-box">
-                    <input type="radio" name="status" id="radio-1" value="1">
-                    <label for="radio-0">启用</label>
-                </div>
-                <div class="radio-box">
-                    <input type="radio" name="status" id="radio-0" value="0">
-                    <label for="radio-1">禁用</label>
-                </div>
+         <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>联系人1：</label>
+            <div class="formControls col-xs-6 col-sm-6">
+                <input type="text" class="input-text" value="{$vo['link'][0]['link_name'] ?? ''}" placeholder="" name="linkman[0]" datatype="*" nullmsg="请填写联系人1">
+                <input type="hidden" name="linkid[0]" value="{$vo['link'][0]['id'] ?? ''}">
+            </div>
+            <div class="col-xs-3 col-sm-3"> </div>
+        </div>
+          <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>联系电话1：</label>
+            <div class="formControls col-xs-6 col-sm-6">
+                <input type="text" class="input-text" value="{$vo['link'][0]['link_tel'] ?? ''}" placeholder="" name="linktel[0]" datatype="*" nullmsg="请填写联系电话1">
+            </div>
+            <div class="col-xs-3 col-sm-3"> </div>
+        </div>
+          <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>联系人2：</label>
+            <div class="formControls col-xs-6 col-sm-6">
+                <input type="text" class="input-text" value="{$vo['link'][1]['link_name'] ?? ''}" placeholder="" name="linkman[1]" datatype="*" nullmsg="请填写联系人2">
+                <input type="hidden" name="linkid[1]" value="{$vo['link'][1]['id'] ?? ''}">
+            </div>
+            <div class="col-xs-3 col-sm-3"> </div>
+        </div>
+          <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>联系电话2：</label>
+            <div class="formControls col-xs-6 col-sm-6">
+                <input type="text" class="input-text" value="{$vo['link'][1]['link_tel'] ?? ''}" placeholder="" name="linktel[1]" datatype="*" nullmsg="请填写联系电话2">
             </div>
             <div class="col-xs-3 col-sm-3"> </div>
         </div>
@@ -75,13 +103,12 @@
             <label class="form-label col-xs-3 col-sm-3">备注：</label>
             <div class="formControls col-xs-6 col-sm-6">
                 <textarea class="textarea"  placeholder="备注" name="remark" onKeyUp="textarealength(this,100)">{$vo.remark ?? ''}</textarea>
-                <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+                <p class="textarea-numberbar"><em class="textarea-length">{$vo.remark ? mb_strlen($vo.remark,'utf-8') : 0}</em>/100</p>
             </div>
             <div class="col-xs-3 col-sm-3"></div>
         </div>
         <div class="row cl">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-            <input type="hidden" name="create_time" value="{php}echo time();{/php}">
             <input type="hidden" name="user_id" value="{php}echo UID;{/php}">
                 <button type="submit" class="btn btn-primary radius">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
                 <button type="button" class="btn btn-default radius ml-20" onClick="layer_close();">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>

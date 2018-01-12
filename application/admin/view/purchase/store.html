@@ -1,0 +1,53 @@
+{include file='public/head'}
+<body>
+    <div class="x-body" >
+    <fieldset class="layui-elem-field">
+          <legend>采购商品</legend>
+          <div class="layui-field-box">
+       <!--  <button  onclick="javascript:window.location.href = '{:url("admin/purchase/purchaseList")}'" class="layui-btn layui-btn-small x-right">
+        </button>
+         <button onclick="javascript:location.reload()" class="layui-btn layui-btn-small x-right">刷新</button>-->
+         <span class="x-right" style="line-height:40px">共有数据:<i class="i_count">{$lists|count}</i>条</span>
+           <table class="layui-table"> 
+        <thead>
+          <tr>
+            <!-- <th>
+              <div class="header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th> -->
+            <th>序号</th>
+            <th>产品序号</th>
+            <th>产品名称</th>
+            <th>数量</th>
+            <th>单价</th>
+            <th>含税单价</th>
+            <th>金额</th>
+            <th>税率</th>
+            <th>税额</th>
+            <th>价税合计</th>
+            <th>备注</th>
+        </thead>
+        <tbody>
+
+        {volist name="lists" key='key' id="vo"}
+          <tr>
+              <td>{$key}</td>
+              <td>{$vo.no}</td>
+              <td>{$vo.name}</td>
+              <td>{$vo.num}({$units[$vo['unit']]})</td>
+              <td>{$vo.unit_price}</td>
+              <td>{$vo.tax_price}</td>
+              <td>{$vo.price}</td>
+              <td>{$vo.rate}</td>
+              <td>{$vo.rate_price}</td>
+              <td>{$vo.total_price}</td>
+              <td>{$vo.remark}</td>
+          </tr>
+        {/volist}
+       
+        </tbody>
+      </table>
+          </div>
+    </fieldset>
+    </div>
+</body>
+{include file="public/foot"}

@@ -1,7 +1,7 @@
 div,input,p,label,h1,h2,h3,h4,h5,h6,span,body,a,form{
 		margin: 0;
 		padding: 0;
-		font:400 14px/36px 'Microsoft Yahei';
+		font:400 14px/28px 'Microsoft Yahei';
 		color:#515151;
 		box-sizing: border-box;	
 	}
@@ -42,8 +42,8 @@ div,input,p,label,h1,h2,h3,h4,h5,h6,span,body,a,form{
 		border:1px solid #dddddd;
 		background: #f1f1f1;
 		color:#515151;
-		font-size:14px;
-		font-weight: 400;
+		font-size:13px;
+		font-weight: 200;
 	}
 	.table tbody tr td{
 		border:1px solid #dddddd;
@@ -56,10 +56,12 @@ div,input,p,label,h1,h2,h3,h4,h5,h6,span,body,a,form{
 		outline: none;
 		text-indent: 5px;
 	}
+	.table select{
+		width: 100px;
+	}
 	.heads{
 		width:96%;
 		margin: 0 auto;
-		height: 70px;
 		overflow: hidden;
 		position: relative;
 	}
@@ -67,7 +69,14 @@ div,input,p,label,h1,h2,h3,h4,h5,h6,span,body,a,form{
 		margin-top:20px;
 		display: block;
 		position: relative;
+		margin: 0px;
+		padding: 0px;
+		padding: 30px;
 	}
+
+
+
+
 	.heads input{
 		border:0;
 		width: 275px;
@@ -78,12 +87,16 @@ div,input,p,label,h1,h2,h3,h4,h5,h6,span,body,a,form{
 	.heads label{
 		font-size:16px;
 		color: #515151;
+        margin-left: 100px;
 
+	}
+	.heads label.active{
+		margin-left: 0px;
 	}
 	.heads select{
 		border:1px solid #dddddd;
 		height: 30px;
-		width:300px;
+		width:200px;
 		outline: none;
 		font-size: 14px;
 		color:#6b6b6b;

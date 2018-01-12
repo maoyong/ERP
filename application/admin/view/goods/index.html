@@ -2,10 +2,7 @@
 {block name="content"}
 <div class="page-container">
     {include file='goods/form' /}
-    {tp:menu menu='add,recycleBin' /}
-    <!-- <form action="{:\\think\\Url::build('excel')}" target="_blank" method="post">
-        <button class="btn btn-success" type="submit">导出Excel</button>
-    </form> -->
+    {tp:menu menu='add,recycleBin' /}<span class="r">共有数据：<strong>{$count}</strong> 条</span> 
     <table class="table table-border table-bordered table-hover table-bg mt-20">
         <thead>
         <tr class="text-c">
@@ -25,6 +22,7 @@
         {/volist}
         </tbody>
     </table>
+    <div class="page-bootstrap">{$page}</div>
 </div>
 {/block}
 

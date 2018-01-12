@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>LotusAdmin</title>
+<title>{$Think.config.site.title}</title>
 <link rel="stylesheet" type="text/css" href="__css__/style.css" tppabs="css/style.css" />
 <meta name="keywords" content="{$Think.config.site.keywords}">
 <meta name="description" content="{$Think.config.site.keywords}">
@@ -48,14 +48,20 @@ canvas{
 <script type="text/javascript" src="__module__/Validform/5.3.2/Validform.min.js"></script>
 <script>
 function login(){
+	$('#bs').attr('disabled', true);
+	$('#bs').css('background', '#999');
 	var username  = $('#username').val();
 	var password  = $('#password').val();
 	if (username == '') {
 		layer.msg('用户名不能为空!', {icon:1}) ;
+		$('#bs').attr('disabled', false);
+		$('#bs').css('background', '#01aaed');
 		return false;
 	}
 	if (password == '') {
 		layer.msg('密码不能为空!', {icon:1}) ;
+		$('#bs').attr('disabled', false);
+		$('#bs').css('background', '#01aaed');
 		return false;
 	}
 	$.ajax({
@@ -70,7 +76,9 @@ function login(){
 			});
 			
 		}else{
-			layer.msg(data.msg,{});
+			$('#bs').attr('disabled', false);
+			$('#bs').css('background', '#01aaed');
+			layer.msg(data.msg,{icon:2});
 		}
 	})
 }

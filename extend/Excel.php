@@ -9,6 +9,7 @@
  */
 
 use think\Exception;
+vendor('phpexcel.Classes.PHPExcel');
 
 class Excel
 {
