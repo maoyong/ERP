@@ -1,7 +1,10 @@
 <form class="mb-20" method="get" action="{:\\think\\Url::build($Request.action)}">
     <input type="text" class="input-text" style="width:250px" placeholder="合同编号" name="name" value="{$Request.param.name}">
-    <!-- <input type="text" class="input-text" style="width:250px" placeholder="团购名称" name="account" value="{$Request.param.account}">
-    <input type="text" class="input-text" style="width:250px" placeholder="邮箱" name="email" value="{$Request.param.email}">
-    <input type="text" class="input-text" style="width:250px" placeholder="手机" name="mobile" value="{$Request.param.mobile}"> -->
-    <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+    <input type="text" class="input-text" style="width:250px" placeholder="销售方式" name="sell_type" value="{$Request.param.supplier}">
+    <input type="date" class="input-text" style="width:250px" placeholder="订单月份" name="start_date" value="{$Request.param.start_date}">
+    -
+	<input type="date" class="input-text" style="width:250px" placeholder="订单月份" name="end_date" value="{$Request.param.end_date}">
+
+    <button type="submit" onclick="$('form').attr('action', '{:\\think\\Url::build($Request.action)}')" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+    <button class="btn btn-success" type="submit" onclick="$('form').attr('action', '{:\\think\\Url::build(\'excel\')}')"><i class="Hui-iconfont">&#xe641;</i>导出Excel</button>
 </form>

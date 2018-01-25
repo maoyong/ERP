@@ -1,7 +1,7 @@
 {extend name="template/base" /}
 {block name="content"}
 <div class="page-container">
-    {include file='form' /}
+    {include file='login_log/form' /}
     <div class="cl pd-5 bg-1 bk-gray">
         <span class="l">
         </span>
@@ -12,13 +12,13 @@
     <table class="table table-border table-bordered table-hover table-bg mt-20">
         <thead>
         <tr class="text-c">
-            {include file="th" /}
+            {include file="login_log/th" /}
         </tr>
         </thead>
         <tbody>
         {volist name="list" id="vo"}
         <tr class="text-c">
-            {include file="td" /}
+            {include file="login_log/td" /}
         </tr>
         {/volist}
         </tbody>

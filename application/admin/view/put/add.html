@@ -1,0 +1,317 @@
+{extend name="template/base" /}
+{block name="nav"}{/block}
+{block name="content"}
+<link rel="stylesheet" href="__static__/css/table.css">
+<body>
+<style type="text/css" media="screen">
+header {
+    color: black;
+}
+</style>
+<div class="x-body" >
+ <form class="form form-horizontal" id="form" method="post" action="{:\\think\\Request::instance()->baseUrl()}">
+ <div class="heads">
+    <div class="headbox">
+         <span class="minbox">
+			<label class="active">入库方式：</label>
+			<select name="put_type" id="put_type">
+				<option value="其他入库">其他入库</option>
+				<option value="采购入库">采购入库</option>
+			</select>
+		 </span>
+		 <span class="minbox">
+			<b id='order_no' style="display: none;">
+			<label>清单号：</label>
+			<input type="hidden" name="getUrl" value="{:url('ajaxGetInfo')}" />
+			<select name="purchase_id" id="order_no_sel">
+				<option >选择清单号</option>
+				{volist name='purchases' id='p'}
+				<option value="{$p.id}">{$p.order_no}</option>
+				{/volist}
+			</select>
+				<input type="hidden" name="order_no">
+			</b>
+		 </span>
+		 <span class="minbox">
+			<label>单据编号：</label>
+			<input type="text" name="compact_no" style="background: #ebebeb;" value="{$order_no}" readonly="true">
+		</span>
+		<div style="clear: both;"></div>
+    <div>
+    <div class="headbox">
+        <span class="minbox">
+		    <label class="active">供应商：</label>
+		    <div style="width: 190px; float: right; margin-right: 4px" id="supplier_ids">
+			<select name="supplier_id" id="supplier_id" data-width='190px' data-size='tiny'>
+				{volist name='suppliers' id='list'}
+				<option value="{$list.id}">{$list.client_name}</option>
+				{/volist}
+			</select>
+			</div>
+		</span>
+		<span class="minbox">
+	      	<label>仓位：</label>
+	      	<select name="position" id="position">
+				<option value="默认仓库">默认仓库</option>
+				<option value="废料仓库">废料仓库</option>
+			</select>
+	     </span>
+	     <span class="minbox">
+	      	<label>入库日期：</label>
+	      	<input type="date" style="border: 1px solid #dddddd" disabled="disabled" name="date" value="{php}echo date('Y-m-d', time());{/php}">
+	     <div style="clear: both;"></div>
+	     </span>
+    <div>
+</div>
+
+<div class="bhbox">
+<table class="table" id="store_table">
+	<thead>
+		<tr>
+			<th>序号</th>
+			<th>产品代码</th>
+			<th>产品名称</th>
+			<th>规格型号</th>
+			<th>单位</th>
+			<th>数量</th>
+			<th>单价</th>
+			<th>含税单价</th>
+			<th>金额</th>
+			<th>税率</th>
+			<th>税额</th>
+			<th>价税合计</th>
+			<th>备注</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><p></p></td>
+			<td>
+            <input type="text" name="no[]">
+			</td>
+			<td>
+				<select class="select-goods" data-width='180px' data-size='tiny' >
+					<option>请选择</option>
+				  	{volist name='goods' id='list'}
+	                    <option value="{$list.goods_no}" model='{$list.model}' goods_name='{$list.goods_no}' unit='{$list.unit}' unit_name='{$list.uname}'>{$list.name}-{$list.model}</option>
+	                {/volist}
+				</select>
+			</td>
+			<td><input type="text" name="type[]" readonly="true"></td>
+			<td><input type="text" name="unit[]" readonly="true"></td>
+			<td><input type="text" name="num[]" ></td>
+			<td><input type="text" name="unit_price[]" readonly="true"></td>
+			<td><input type="text" name="tax_price[]" class="tax_price"></td>
+			<td><input type="text" name="price[]" readonly="true"></td>
+			<td><input type="text" name="rates[]" value="17" class="rate"></td>
+			<td><input type="text" name="rate_prices[]" readonly="true"></td>
+			<td><input type="text" name="total_price[]" readonly="true"></td>
+			<td><input type="text" name="remark[]"></td>
+		</tr>
+		<tr>
+			<td><p></p></td>
+			<td>
+            <input type="text" name="no[]">
+			</td>
+			<td>
+				<select class="select-goods" data-width='180px' data-size='tiny' >
+					<option>请选择</option>
+				  	{volist name='goods' id='list'}
+	                    <option value="{$list.goods_no}" model='{$list.model}' goods_name='{$list.goods_no}' unit='{$list.unit}' unit_name='{$list.uname}'>{$list.name}-{$list.model}</option>
+	                {/volist}
+				</select>
+			</td>
+			<td><input type="text" name="type[]" readonly="true"></td>
+			<td><input type="text" name="unit[]" readonly="true"></td>
+			<td><input type="text" name="num[]" ></td>
+			<td><input type="text" name="unit_price[]" readonly="true"></td>
+			<td><input type="text" name="tax_price[]" class="tax_price"></td>
+			<td><input type="text" name="price[]" readonly="true"></td>
+			<td><input type="text" name="rates[]" value="17" class="rate"></td>
+			<td><input type="text" name="rate_prices[]" readonly="true"></td>
+			<td><input type="text" name="total_price[]" readonly="true"></td>
+			<td><input type="text" name="remark[]"></td>
+		</tr>
+		<tr>
+			<td><p></p></td>
+			<td>
+            <input type="text" name="no[]">
+			</td>
+			<td>
+				<select class="select-goods" data-width='180px' data-size='tiny' >
+					<option>请选择</option>
+				  	{volist name='goods' id='list'}
+	                    <option value="{$list.goods_no}" model='{$list.model}' goods_name='{$list.goods_no}' unit='{$list.unit}' unit_name='{$list.uname}'>{$list.name}-{$list.model}</option>
+	                {/volist}
+				</select>
+			</td>
+			<td><input type="text" name="type[]" readonly="true"></td>
+			<td><input type="text" name="unit[]" readonly="true"></td>
+			<td><input type="text" name="num[]" ></td>
+			<td><input type="text" name="unit_price[]" readonly="true"></td>
+			<td><input type="text" name="tax_price[]" class="tax_price"></td>
+			<td><input type="text" name="price[]" readonly="true"></td>
+			<td><input type="text" name="rates[]" value="17" class="rate"></td>
+			<td><input type="text" name="rate_prices[]" readonly="true"></td>
+			<td><input type="text" name="total_price[]" readonly="true"></td>
+			<td><input type="text" name="remark[]"></td>
+		</tr>
+		<tr>
+			<td><p></p></td>
+			<td>
+            <input type="text" name="no[]">
+			</td>
+			<td>
+				<select class="select-goods" data-width='180px' data-size='tiny' >
+					<option>请选择</option>
+				  	{volist name='goods' id='list'}
+	                    <option value="{$list.goods_no}" model='{$list.model}' goods_name='{$list.goods_no}' unit='{$list.unit}' unit_name='{$list.uname}'>{$list.name}-{$list.model}</option>
+	                {/volist}
+				</select>
+			</td>
+			<td><input type="text" name="type[]" readonly="true"></td>
+			<td><input type="text" name="unit[]" readonly="true"></td>
+			<td><input type="text" name="num[]" ></td>
+			<td><input type="text" name="unit_price[]" readonly="true"></td>
+			<td><input type="text" name="tax_price[]" class="tax_price"></td>
+			<td><input type="text" name="price[]" readonly="true"></td>
+			<td><input type="text" name="rates[]" value="17" class="rate"></td>
+			<td><input type="text" name="rate_prices[]" readonly="true"></td>
+			<td><input type="text" name="total_price[]" readonly="true"></td>
+			<td><input type="text" name="remark[]"></td>
+		</tr>
+	</tbody>
+</table>
+
+<table id="tpl" style="display: none;">
+	<tr>
+			<td><p></p></td>
+			<td>
+            <input type="text" name="no[]">
+			</td>
+			<td>
+				<select class="select-goods-#no#" data-width='180px' data-size='tiny' >
+					<option>请选择</option>
+				  	{volist name='goods' id='list'}
+	                    <option value="{$list.goods_no}" model='{$list.model}' goods_name='{$list.goods_no}' unit='{$list.unit}' unit_name='{$list.uname}'>{$list.name}-{$list.model}</option>
+	                {/volist}
+				</select>
+			</td>
+			<td><input type="text" name="type[]" readonly="true"></td>
+			<td><input type="text" name="unit[]" readonly="true"></td>
+			<td><input type="text" name="num[]" ></td>
+			<td><input type="text" name="unit_price[]" readonly="true"></td>
+			<td><input type="text" name="tax_price[]" class="tax_price"></td>
+			<td><input type="text" name="price[]" readonly="true"></td>
+			<td><input type="text" name="rates[]" value="17" class="rate"></td>
+			<td><input type="text" name="rate_prices[]" readonly="true"></td>
+			<td><input type="text" name="total_price[]" readonly="true"></td>
+			<td><input type="text" name="remark[]"></td>
+		</tr>
+</table>
+<input type="hidden" name="select_key" value="0">
+<!--按钮-->
+<table class="tabs" >
+       	<tr>
+			<td colspan="13"><p class="appends"><i class="Hui-iconfont">&#xe610;</i></p></td>
+		</tr>
+        <tr>
+			<td style="width: 40px;"><p>合计</p></td>
+			<td><input type="text" disabled></td>
+			<td><input type="text" disabled></td>
+			<td><input type="text" disabled></td>
+			<td><input type="text" disabled></td>
+			<td><input type="text" class="getNum" readonly="true" style="cursor:pointer; text-align: center;"></td>
+			<td><input type="text" disabled></td>
+			<td><input type="text" disabled></td>
+			<td><input type="text" class="getPrice" readonly="true" style="cursor:pointer; text-align: center;"></td>
+			<td><input type="text" disabled></td>
+			<td><input type="text" disabled></td>
+			<td><input type="text" disabled></td>
+			<td><input type="text" disabled></td>
+		</tr>
+</table>			
+	<div class="footers">
+		<!-- <div class="he"><label>说明：</label><input type="text" name="remarks"></div>
+		<div class="fo">
+		     <label>折后应付金额：</label><input type="text" name="rate_money" />
+		     <label class="mar">折扣率：</label><input type="text" name="rate">%
+		     <label class="mar">本次付款：</label><input type="text" name="pay_money">
+		     <label class="mar">结算账户：</label><input type="text">
+			    </div> -->
+		<div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3">备注：</label>
+            <div class="formControls col-xs-6 col-sm-6">
+            	<input type="hidden" name="total_money" />
+            	<input type="hidden" name="total_num" />
+                <textarea class="textarea"  placeholder="备注" name="remarks" onKeyUp="textarealength(this,100)">{$vo.remark ?? ''}</textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+            </div>
+            <div class="col-xs-3 col-sm-3"></div>
+        </div>
+	    <div class="row cl">
+            <div class="button_box">
+            <input type="hidden" name="user_id" value="{php}echo UID;{/php}">
+                <button type="submit" class="btn btn-primary radius">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
+                <button type="button" class="btn btn-default radius ml-20" onClick="layer_close();">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+	</div>
+	</form>
+</div>
+</div>
+</body>
+
+
+{/block}
+{block name="script"}
+<script type="text/javascript" src="__module__/Validform/5.3.2/Validform.min.js"></script>
+<script>
+    $(function () {
+        /* 单选按钮组初始化选中状态，可以设定默认值 */
+        $("[name='status'][value='{$vo.status ?? '1'}']").attr("checked",true);
+        /* 下拉框初始化选中状态，可以设定默认值 */
+        $("[name='select']").find("[value='{$vo.select ?? ''}']").attr("selected",true);
+
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form").Validform({
+            tiptype:2,
+            ajaxPost:true,
+            showAllError:true,
+            callback:function(ret){
+                ajax_progress(ret);
+            }
+        });
+    })
+</script>
+{literal}
+<script id='tmpl_store'  type='text/x-jquery-tmpl'>
+{{each(i, v) $data.goods}}
+	<tr>
+			<td><p>${i}</p></td>
+			<td>
+				<input type="text" name="no[]" value="${v.goods_no}" >
+			</td>
+			<td><input type="text" name="name[]" value="${v.name}" readonly="true"></td>
+			<td><input type="text" name="type[]" value="${v.model}" readonly="true"></td>
+			<td><input type="text" name="type[]" value="${v.uname}" readonly="true"></td>
+			<td><input type="text" name="num[]" value="${v.num}"></td>
+			<td><input type="text" name="unit_price[]" readonly="true" value="${v.unit_price}"></td>
+			<td><input type="text" name="tax_price[]" class="tax_price" value="${v.tax_price}"></td>
+			<td><input type="text" name="price[]" readonly="true" value="${v.price}"></td>
+			<td><input type="text" name="rates[]" value="17" class="rate" value="${v.rate}"></td>
+			<td><input type="text" name="rate_prices[]" readonly="true" value="${v.rate_price}"></td>
+			<td><input type="text" name="total_price[]" readonly="true" value="${v.total_price}"></td>
+			<td><input type="text" name="remark[]" value="${v.remark}"></td>
+		</tr>
+{{/each}}
+</script>
+{/literal}
+<script type="text/javascript" src="__js__/jquery.tmpl.js"></script>
+<script type="text/javascript" src="__js__/table.js"></script>
+{/block}

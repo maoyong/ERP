@@ -4,26 +4,27 @@ div,input,p,label,h1,h2,h3,h4,h5,h6,span,body,a,form{
 		font:400 14px/28px 'Microsoft Yahei';
 		color:#515151;
 		box-sizing: border-box;	
+		text-indent:4px;
 	}
 	.tabs{
-		width:96%;
+		width:100%;
 		text-align: center;
 		border-collapse: collapse;
 		margin: 0 auto;
-		
 	}
 	.tabs  tr{
-		background:#e1ebff;
+		background: #ffffff;
 	}
 	
-		.tabs  tr td{
+		.bhbox .tabs  tr td{
 		border:1px solid #dddddd;
 		color:#6b6b6b;
 		font-size: 14px;
+		background: #ffffff;
 	}
 	
 	.table{
-		width:96%;
+		width:100%;
 		text-align: center;
 		border-collapse: collapse;
 		margin: 0 auto;
@@ -33,10 +34,16 @@ div,input,p,label,h1,h2,h3,h4,h5,h6,span,body,a,form{
 		border:0px;
 		outline: none;
 		text-indent: 5px;
-		background:#e1ebff;
+		background: #ffffff;
 	}
 	
-	
+	.bhbox{
+		width: 100%;
+	}
+	.bhbox .table,.tabs{
+		width: 100%;
+		min-width: 1200px;
+	}
 	
 	.table thead tr th{
 		border:1px solid #dddddd;
@@ -45,6 +52,21 @@ div,input,p,label,h1,h2,h3,h4,h5,h6,span,body,a,form{
 		font-size:13px;
 		font-weight: 200;
 	}
+	.table thead tr th:nth-of-type(1){
+		width: 30px;
+	}
+	.table thead tr th:nth-of-type(2){
+		width: 100px;
+	}
+	.table thead tr td:nth-of-type(1){
+		width: 30px;
+	}
+
+    .button_box {
+    	margin: 20px auto;
+    	width: 200px;
+    }
+
 	.table tbody tr td{
 		border:1px solid #dddddd;
 		color:#6b6b6b;
@@ -56,52 +78,51 @@ div,input,p,label,h1,h2,h3,h4,h5,h6,span,body,a,form{
 		outline: none;
 		text-indent: 5px;
 	}
+	.table tbody tr td select{
+		width:100%;
+		border:1px solid #dddddd;
+		outline: none;
+		text-indent: 5px;
+	}
 	.table select{
 		width: 100px;
 	}
+	.table select-goods{
+		width: 100px;
+	}
+	
 	.heads{
-		width:96%;
+		width: 98%;
 		margin: 0 auto;
-		overflow: hidden;
-		position: relative;
+		min-width: 1000px;
 	}
-	.heads span{
-		margin-top:20px;
-		display: block;
-		position: relative;
-		margin: 0px;
-		padding: 0px;
-		padding: 30px;
-	}
-
-
-
-
-	.heads input{
-		border:0;
-		width: 275px;
-		height: 27px;
-		outline: none;
-		border-right: 1px solid #dddddd;
-	}
-	.heads label{
-		font-size:16px;
-		color: #515151;
+    .heads .headbox{
+    	width: 100%;
+    	min-width: 1200px;
+    }
+    .heads .headbox .minbox{
+    	display: block;
+        width: 300px;
+        height: 30px;
+        float: left;
         margin-left: 100px;
+        margin-top:10px;
+        margin-bottom:10px; 
+    }
+    .heads .headbox .minbox:nth-of-type(1),.minbox:nth-of-type(4){
+    	margin-left: 0;
+    }
 
-	}
-	.heads label.active{
-		margin-left: 0px;
-	}
-	.heads select{
-		border:1px solid #dddddd;
-		height: 30px;
-		width:200px;
-		outline: none;
-		font-size: 14px;
-		color:#6b6b6b;
-	}
-
+     .heads .headbox .minbox input,select{
+     	width: 190px;
+     	border: 1px solid #dddddd;
+     	height: 30px;
+     	float: right;
+     	border-radius: 3px;
+     }
+     .heads .headbox .minbox label{
+     	float: left;
+     }
 	.heads .serchs{
 		position: absolute;
 		top: 6px;
@@ -151,8 +172,58 @@ div,input,p,label,h1,h2,h3,h4,h5,h6,span,body,a,form{
 		cursor:pointer;
 		font-size:20px;
 		font-weight: 600;
-		color: #3788ff;
+		color: #91919;
+	}
+
+	.appends .Hui-iconfont{
+		margin-right: 5px;
+		color: #919191;
+	}
+	.appends .Hui-iconfont:hover{
+		color:#3788ff;
 	}
 	.form{
 		position: relative;
 			}
+
+
+*{
+		margin: 0;
+		padding: 0;
+	}
+	.serch{
+		width: 200px;
+		height: 30px;
+		border: 1px solid #ddd;
+	}
+	.serch input{
+		width:200px;
+		height: 28px;
+		border: 0;
+		text-indent: 5px;
+		font: 400 16px/32px 'Microsoft YaHei';
+		outline: none;
+		color: #515151;
+	}
+	.tisbox{
+		width:199px;
+		text-decoration: none;
+		margin: 0;
+		padding: 0;
+		border: 1px solid #dddddd;
+		border-top:0;
+		border-bottom:0;
+		position:relative;
+        z-index:100;
+	}
+	.tisbox li{
+		display:block;
+		color: #515151;
+		font: 400 14px/28px 'Microsoft YaHei';
+		border-bottom: 1px solid #dddddd;
+        text-indent: 5px;
+	}
+	.tisbox li:hover{
+		background:#3788ff;
+		color: #ffffff;
+	}

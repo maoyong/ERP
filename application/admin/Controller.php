@@ -88,11 +88,18 @@ class Controller
         $table_info = $model->getTableInfo();
         $param = array_merge($this->request->param(), $param);
         foreach ($param as $key => $val) {
-            if ($val !== "" && in_array($key, $table_info['fields'])) {
-                $map[$key] = $val;
+            if (stripos($key, '.') > 0) {
+                $keys = explode('.', $key);
+                if ($val !== "" && in_array($keys[1], $table_info['fields'])) {
+                    $map[$key] = $val;
+                }
+            }else{
+                if ($val !== "" && in_array($key, $table_info['fields'])) {
+                    $map[$key] = $val;
+                }
             }
+            
         }
-
         return $map;
     }
 
@@ -224,15 +231,23 @@ class Controller
         $action     = strtolower($this->request->action());
         // 排除权限
         // 排除权限
-        $not_check = ['admin/index/index','admin/index/welcome', 'admin/authgroup/getjson', 'admin/system/clear'];
-        $url = $module . '/' . $controller . '/' . $action;
-        $url = strtolower($url);
-        if (!in_array($url, $not_check)) {
-            $auth     = new Auth();
-            if (!$auth->check($url, UID) && UID != 1) {
-                $this->error('没有权限',"{$module}/{$controller}/index");
+        $not_check = ['admin/index/index','admin/index/welcome', "admin/{$controller}/excel", "admin/{$controller}/printf","admin/{$controller}/printf"];
+        //过滤调ajax请求
+        if (!stripos('#'.$action, 'ajax')) {
+            $url = $module . '/' . $controller . '/' . $action;
+            $url = strtolower($url);
+            if (!in_array($url, $not_check)) {
+                $auth     = new Auth();
+                if (!$auth->check($url, UID) && UID != 1 ) {
+                    if ($this->request->isAjax()) {
+                        ajax_return_adv_error('没有权限!');
+                    }else{
+                        $this->error('没有权限',"{$module}/{$controller}/index");
+                    }
+                }
             }
         }
+        
     }
 
       /**
@@ -398,13 +413,11 @@ class Controller
 
             // 每页数据数量
             $listRows = $this->request->param('numPerPage') ?: Config::get("paginate.list_rows");
-
             $list = $model
                 ->field($field)
                 ->where($map)
                 ->order($order_by)
                 ->paginate($listRows, false, ['query' => $this->request->get()]);
-
             if ($return) {
                 // 返回值
                 return $list;

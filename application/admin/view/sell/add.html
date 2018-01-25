@@ -10,24 +10,49 @@ header {
 </style>
 <div class="x-body" >
  <form class="form form-horizontal" id="form" method="post" action="{:\\think\\Request::instance()->baseUrl()}">
-	<div class="heads">
-	<span>
+ <div class="heads">
+    <div class="headbox">
+         <span class="minbox">
 			<label class="active">销售方式：</label>
-			<input type="text" style="border: 1px solid #dddddd" name="sell_type" >
-			<label>订单编号：</label>
-			<input type="date" style="border: 1px solid #dddddd" name="date">
+			<select name="sell_type">
+				<option value="现结">现结</option>
+				<option value="月结">月结</option>
+			</select>
+		 </span>
+		 <span class="minbox">
+			<label>订单日期：</label>
+			<input type="date" style="border: 1px solid #dddddd" name="date" value="{php}echo date('Y-m-d', time()){/php}">
+		 </span>
+		 <span class="minbox">
 			<label>合同编号：</label>
-			<input type="text" style="border: 1px solid #dddddd" name="order_no" value="{$order_no}" readonly="true">
-	</span>
-	<span>
-		   	<label class="active">购货单位：</label>
-			<input type="text" style="border: 1px solid #dddddd" name="deliver_unit" >
+			<input type="text" style="background: #ebebeb;" value="{$order_no}" readonly="true" name="order_no">
+		</span>
+		<div style="clear: both;"></div>
+    <div>
+    <div class="headbox">
+        <span class="minbox">
+		    <label class="active">购货单位：</label>
+			<div style="width: 190px; float: right; margin-right: 4px" id="supplier_ids">
+			<select name="client_id" id="supplier_id" data-width='190px' data-size='tiny'>
+				<option value="">请选择购货单位</option>
+				{volist name='clients' id='list'}
+				<option value="{$list.id}">{$list.client_name}</option>
+				{/volist}
+			</select>
+			</div>
+		</span>
+		<span class="minbox">
 	      	<label>交货日期：</label>
-	      	<input type="date" style="border: 1px solid #dddddd" name="deliver_time">
+	      	<input type="date" style="border: 1px solid #dddddd" name="deliver_time"  value="{php}echo date('Y-m-d', time()){/php}">
+	     </span>
+	     <span class="minbox">
 	      	<label>单据状态：</label>
-	      	<input type="text" style="border: 1px solid #dddddd" name="status">
-	</span>
+	     <div style="clear: both;"></div>
+	     </span>
+    <div>
 </div>
+
+<div class="bhbox">
 <table class="table">
 	<thead>
 		<tr>
@@ -50,52 +75,18 @@ header {
 		<tr>
 			<td><p></p></td>
 			<td>
-			<select class="select" name="no[]">
-				{volist name='goods' id='list'}
-                    <option value="{$list.goods_no}">{$list.goods_no}</option>
-                {/volist}
-               </select>
+            <input type="text" name="no[]">
 			</td>
-			<td><select class="select" name="name[]">
-				{volist name='goods' id='list'}
-                    <option value="{$list.name}">{$list.name}</option>
-                {/volist}
-               </select></td>
-			<td><input type="text" name="type[]"></td>
-			<td><select class="select" name="unit[]">
-                    {volist name='units' id='list'}
-                    <option value="{$list.id}">{$list.name}</option>
-                    {/volist}
-                </select></td>
-			<td><input type="text" name="num[]" ></td>
-			<td><input type="text" name="unit_price[]" readonly="true"></td>
-			<td><input type="text" name="tax_price[]" class="tax_price"></td>
-			<td><input type="text" name="price[]" readonly="true"></td>
-			<td><input type="text" name="rates[]" value="17" class="rate"></td>
-			<td><input type="text" name="rate_prices[]" readonly="true"></td>
-			<td><input type="text" name="total_price[]" readonly="true"></td>
-			<td><input type="text" name="remark[]"></td>
-		</tr>
-		<tr>
-			<td><p></p></td>
-		<td>
-			<select class="select" name="no[]">
-				{volist name='goods' id='list'}
-                    <option value="{$list.goods_no}">{$list.goods_no}</option>
-                {/volist}
-               </select>
+			<td>
+				<select class="select-goods" data-width='150px' data-size='tiny' >
+					<option>请选择</option>
+				  	{volist name='goods' id='list'}
+	                    <option value="{$list.goods_no}" model='{$list.model}' goods_name='{$list.goods_no}' unit='{$list.unit}' unit_name='{$list.uname}'>{$list.name}</option>
+	                {/volist}
+				</select>
 			</td>
-			<td><select class="select" name="name[]">
-				{volist name='goods' id='list'}
-                    <option value="{$list.name}">{$list.name}</option>
-                {/volist}
-               </select></td>
-			<td><input type="text" name="type[]"></td>
-			<td><select class="select" name="unit[]">
-                    {volist name='units' id='list'}
-                    <option value="{$list.id}">{$list.name}</option>
-                    {/volist}
-                </select></td>
+			<td><input type="text" name="type[]" readonly="true"></td>
+			<td><input type="text" name="unit[]" readonly="true"></td>
 			<td><input type="text" name="num[]" ></td>
 			<td><input type="text" name="unit_price[]" readonly="true"></td>
 			<td><input type="text" name="tax_price[]" class="tax_price"></td>
@@ -108,23 +99,18 @@ header {
 		<tr>
 			<td><p></p></td>
 			<td>
-			<select class="select" name="no[]">
-				{volist name='goods' id='list'}
-                    <option value="{$list.goods_no}">{$list.goods_no}</option>
-                {/volist}
-               </select>
+            <input type="text" name="no[]">
 			</td>
-			<td><select class="select" name="name[]">
-				{volist name='goods' id='list'}
-                    <option value="{$list.name}">{$list.name}</option>
-                {/volist}
-               </select></td>
-			<td><input type="text" name="type[]"></td>
-			<td><select class="select" name="unit[]">
-                    {volist name='units' id='list'}
-                    <option value="{$list.id}">{$list.name}</option>
-                    {/volist}
-                </select></td>
+			<td>
+				<select class="select-goods" data-width='150px' data-size='tiny' >
+					<option>请选择</option>
+				  	{volist name='goods' id='list'}
+	                    <option value="{$list.goods_no}" model='{$list.model}' goods_name='{$list.goods_no}' unit='{$list.unit}' unit_name='{$list.uname}'>{$list.name}</option>
+	                {/volist}
+				</select>
+			</td>
+			<td><input type="text" name="type[]" readonly="true"></td>
+			<td><input type="text" name="unit[]" readonly="true"></td>
 			<td><input type="text" name="num[]" ></td>
 			<td><input type="text" name="unit_price[]" readonly="true"></td>
 			<td><input type="text" name="tax_price[]" class="tax_price"></td>
@@ -137,23 +123,42 @@ header {
 		<tr>
 			<td><p></p></td>
 			<td>
-			<select class="select" name="no[]">
-				{volist name='goods' id='list'}
-                    <option value="{$list.goods_no}">{$list.goods_no}</option>
-                {/volist}
-               </select>
+            <input type="text" name="no[]">
 			</td>
-			<td><select class="select" name="name[]">
-				{volist name='goods' id='list'}
-                    <option value="{$list.name}">{$list.name}</option>
-                {/volist}
-               </select></td>
-			<td><input type="text" name="type[]"></td>
-			<td><select class="select" name="unit[]">
-                    {volist name='units' id='list'}
-                    <option value="{$list.id}">{$list.name}</option>
-                    {/volist}
-                </select></td>
+			<td>
+				<select class="select-goods" data-width='150px' data-size='tiny' >
+					<option>请选择</option>
+				  	{volist name='goods' id='list'}
+	                    <option value="{$list.goods_no}" model='{$list.model}' goods_name='{$list.goods_no}' unit='{$list.unit}' unit_name='{$list.uname}'>{$list.name}</option>
+	                {/volist}
+				</select>
+			</td>
+			<td><input type="text" name="type[]" readonly="true"></td>
+			<td><input type="text" name="unit[]" readonly="true"></td>
+			<td><input type="text" name="num[]" ></td>
+			<td><input type="text" name="unit_price[]" readonly="true"></td>
+			<td><input type="text" name="tax_price[]" class="tax_price"></td>
+			<td><input type="text" name="price[]" readonly="true"></td>
+			<td><input type="text" name="rates[]" value="17" class="rate"></td>
+			<td><input type="text" name="rate_prices[]" readonly="true"></td>
+			<td><input type="text" name="total_price[]" readonly="true"></td>
+			<td><input type="text" name="remark[]"></td>
+		</tr>
+		<tr>
+			<td><p></p></td>
+			<td>
+            <input type="text" name="no[]">
+			</td>
+			<td>
+				<select class="select-goods" data-width='150px' data-size='tiny' >
+					<option>请选择</option>
+				  	{volist name='goods' id='list'}
+	                    <option value="{$list.goods_no}" model='{$list.model}' goods_name='{$list.goods_no}' unit='{$list.unit}' unit_name='{$list.uname}'>{$list.name}</option>
+	                {/volist}
+				</select>
+			</td>
+			<td><input type="text" name="type[]" readonly="true"></td>
+			<td><input type="text" name="unit[]" readonly="true"></td>
 			<td><input type="text" name="num[]" ></td>
 			<td><input type="text" name="unit_price[]" readonly="true"></td>
 			<td><input type="text" name="tax_price[]" class="tax_price"></td>
@@ -170,23 +175,18 @@ header {
 	<tr>
 			<td><p></p></td>
 			<td>
-			<select class="select" name="no[]">
-				{volist name='goods' id='list'}
-                    <option value="{$list.goods_no}">{$list.goods_no}</option>
-                {/volist}
-               </select>
+            <input type="text" name="no[]">
 			</td>
-			<td><select class="select" name="name[]">
-				{volist name='goods' id='list'}
-                    <option value="{$list.name}">{$list.name}</option>
-                {/volist}
-               </select></td>
-			<td><input type="text" name="type[]"></td>
-			<td><select class="select" name="unit[]">
-                    {volist name='units' id='list'}
-                    <option value="{$list.id}">{$list.name}</option>
-                    {/volist}
-                </select></td>
+			<td>
+				<select class="select-goods-#no#" data-width='150px' data-size='tiny' >
+					<option>请选择</option>
+				  	{volist name='goods' id='list'}
+	                    <option value="{$list.goods_no}" model='{$list.model}' goods_name='{$list.goods_no}' unit='{$list.unit}' unit_name='{$list.uname}'>{$list.name}</option>
+	                {/volist}
+				</select>
+			</td>
+			<td><input type="text" name="type[]" readonly="true"></td>
+			<td><input type="text" name="unit[]" readonly="true"></td>
 			<td><input type="text" name="num[]" ></td>
 			<td><input type="text" name="unit_price[]" readonly="true"></td>
 			<td><input type="text" name="tax_price[]" class="tax_price"></td>
@@ -197,27 +197,28 @@ header {
 			<td><input type="text" name="remark[]"></td>
 		</tr>
 </table>
+<input type="hidden" name="select_key" value="0">
 <!--按钮-->
-<table class="tabs">
-       	<tr style="background: #ffffff;">
-			<td colspan="13"><p class="appends">新增+</p></td>
+<table class="tabs" >
+       	<tr>
+			<td colspan="13"><p class="appends"><i class="Hui-iconfont">&#xe610;</i></p></td>
 		</tr>
         <tr>
-			<td><p>合计</p></td>
+			<td style="width: 40px;"><p>合计</p></td>
 			<td><input type="text" disabled></td>
 			<td><input type="text" disabled></td>
 			<td><input type="text" disabled></td>
 			<td><input type="text" disabled></td>
-			<td><input type="text" class="getNum" readonly="true" style="cursor:pointer;"></td>
+			<td><input type="text" class="getNum" readonly="true" style="cursor:pointer; text-align: center;"></td>
 			<td><input type="text" disabled></td>
 			<td><input type="text" disabled></td>
-			<td><input type="text" class="getPrice" readonly="true" style="cursor:pointer;"></td>
+			<td><input type="text" class="getPrice" readonly="true" style="cursor:pointer; text-align: center;"></td>
 			<td><input type="text" disabled></td>
 			<td><input type="text" disabled></td>
 			<td><input type="text" disabled></td>
 			<td><input type="text" disabled></td>
 		</tr>
-</table>		
+</table>	
 	<div class="footers">
 		<!-- <div class="he"><label>说明：</label><input type="text" name="remarks"></div>
 		<div class="fo">
@@ -236,8 +237,8 @@ header {
             </div>
             <div class="col-xs-3 col-sm-3"></div>
         </div>
-	    <div class="row cl">
-            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+	   <div class="row cl">
+            <div class="button_box">
             <input type="hidden" name="user_id" value="{php}echo UID;{/php}">
                 <button type="submit" class="btn btn-primary radius">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
                 <button type="button" class="btn btn-default radius ml-20" onClick="layer_close();">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
@@ -245,6 +246,7 @@ header {
         </div>
 	</div>
 	</form>
+</div>
 </div>
 </body>
 

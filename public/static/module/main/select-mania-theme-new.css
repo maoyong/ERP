@@ -1,0 +1,35 @@
+.select-mania-theme-new .select-mania-inner { border: 1px solid #D6D6D6; }
+ 
+/* SELECTED VALUES */
+.select-mania-theme-new.select-mania.select-mania-multiple .select-mania-value {
+ border: 1px solid #3788ff;
+ background-color: #3788ff; color: white; }
+ 
+/*  DROPDOWN */
+.select-mania-theme-new .select-mania { border: 1px solid #D6D6D6; }
+ 
+.select-mania-theme-new .select-mania-search-input {
+  border: 1px solid #D6D6D6;
+  color: #5A5A5A;
+}
+
+.select-mania-theme-new .select-mania-selected {
+	background-color: #3788ff;
+	color:#fff;
+}
+
+.select-mania-theme-new .select-mania-selected {
+	background-color: #3788ff;
+	color:#fff;
+}
+
+.select-mania-theme-new .select-mania-arrow{
+	display: none;
+}
+ 
+.select-mania-theme-new .select-mania-item:hover { background:#3788ff;
+}
+ 
+.select-mania-theme-new .select-mania-item.select-mania-selected {
+ background: #3788ff; color: white; }
+.select-mania-theme-new .select-mania-value-text{ position: absolute; top: 0; height: 30px !important; display: block; overflow: hidden; margin-top: 4px  }

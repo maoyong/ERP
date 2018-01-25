@@ -24,4 +24,6 @@ class Client extends Model
 		$info['link'] = DB::name('link')->where(['link_id'=>$id, 'link_type'=>0])->select();
  		return $info;
  	}
+
+
 }

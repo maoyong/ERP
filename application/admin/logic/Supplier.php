@@ -15,7 +15,7 @@ class Supplier
         try {
             $id = Db::name("Supplier")->insertGetId($data['base_info']);
             if ($id < 0) {
-            	throw new Exception('操作失败！');
+            	throw new \Exception('操作失败！');
             }
             $data['bank_info']['band_id'] = (int)$id;
             if (isset($data['link_info'])) {
@@ -37,5 +37,9 @@ class Supplier
             return $e->getMessage();
         }
 	}
+
+    public function getList(){
+        return DB::name('supplier')->field('id, client_name')->where(['isdelete' => 0])->select();
+    }
 
 }

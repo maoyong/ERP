@@ -101,7 +101,7 @@ class Tp extends Taglib
                 case 'recyclebin':
                     $title = isset($titleArr[$k]) && $titleArr[$k] ? $titleArr[$k] : '回收站';
                     list($url, $param) = $this->parseUrl($url);
-                    $parseStr .= '<a href="javascript:;" onclick="open_window(\'' . $title . '\',\'<?php echo \think\Url::build(\'' . $url . '\', [' . $param . ']); ?>\')" class="btn btn-secondary radius mr-5"><i class="Hui-iconfont">&#xe6b9;</i> ' . $title . '</a>';
+                    $parseStr .= '<a href="<?php echo \think\Url::build(\'' . $url . '\', [' . $param . ']); ?>" class="btn btn-secondary radius mr-5" target="_blank"><i class="Hui-iconfont">&#xe6b9;</i> ' . $title . '</a>';
                     break;
                 case 'recycle':
                     $title = isset($titleArr[$k]) && $titleArr[$k] ? $titleArr[$k] : '还原';
@@ -148,7 +148,12 @@ class Tp extends Taglib
                     $title = isset($titleArr[$k]) && $titleArr[$k] ? $titleArr[$k] : '仓库';
                     list($url, $param) = $this->parseUrl($url, 'id=$vo["id"]');
                     $class = isset($tag['class']) ? $tag['class'] : 'label-primary';
-                    $parseStr .= ' <a title="' . $title . '" href="javascript:;" onclick="layer_open(\'' . $title . '\',\'<?php echo \think\Url::build(\'' . $url . '\', [' . $param . ']); ?>\')" class="label radius ml-5 ' . $class . '">' . $title . '</a>';
+                    $parseStr .= ' <a title="' . $title . '" href="javascript:;" onclick="layer_open(\'' . $title . '\',\'<?php echo \think\Url::build(\'' . $url . '\', [' . $param . ']); ?>\')"  class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe620;</i> </a>';
+                    break;
+                case 'sprintf':
+                    $title = isset($titleArr[$k]) && $titleArr[$k] ? $titleArr[$k] : '打印';
+                    list($url, $param) = $this->parseUrl($url, 'id=$vo["id"]');
+                    $parseStr .= '<a title="' . $title . '" href="<?php echo \think\Url::build(\'' . $url . '\', [' . $param . ']); ?>" target="_blank"><i class="Hui-iconfont">&#xe652;</i> </a>';
                     break;
                 default:
                     // 默认为小菜单

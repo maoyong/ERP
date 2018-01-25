@@ -1,0 +1,9 @@
+<td><input type="checkbox" name="id[]" value="{$vo.id}"></td>
+<td>{$vo.id}</td>
+<td>{$vo.goods_no}</td>
+<td>{$vo.name}</td>
+<td>{$vo.brand}</td>
+<td>{$vo.model}</td>
+<td>{$vo.uname}</td>
+<td>{if condition="$vo['store_num'] lt 0"}<font color="red">{$vo.store_num}</font>{else /}{$vo.store_num}{/if}</td>
+<td>{$vo.remark}</td>

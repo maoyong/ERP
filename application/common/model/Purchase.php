@@ -13,6 +13,8 @@ class Purchase extends Model
         'status'    =>  'integer',
         'order_time'  =>  'timestamp:Y-m-d',
         'check_time'  =>  'timestamp:Y-m-d',
+        'create_time'  =>  'timestamp:Y-m-d',
+        'update_time'  =>  'timestamp:Y-m-d',
     ];
 
 
@@ -22,7 +24,14 @@ class Purchase extends Model
  			return [];
  		}
  		$info['user_info'] = DB::name('user')->field('username,realname')->where('id', $info['user_id'])->find();
- 		$info['goods'] = DB::name('Purchase_goods')->where('pid', $id)->select();
+ 		$info['goods'] = DB::name('Purchase_goods')
+ 							->alias('a')
+ 							->field('a.*,g.name,g.model,u.name as uname')
+ 							->join('goods g', 'a.goods_no=g.goods_no', 'left')
+ 							->join('goods_unit u', 'g.unit=u.id', 'left')
+ 							->where('pid', $id)
+ 							->select();
+ 		$info['suppliers'] = DB::name('supplier')->field('client_name')->where('id', $info['supplier'])->find();
  		return $info;
  	}
 }

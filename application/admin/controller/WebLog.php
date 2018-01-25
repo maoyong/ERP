@@ -91,7 +91,7 @@ class WebLog extends Controller
         // 查询
         $item = Loader::model('WebLog')->alias('w')->field($field)
             ->join([
-                ['__ADMIN_USER__ u', 'u.id=w.uid', 'LEFT'],
+                ['__USER__ u', 'u.id=w.uid', 'LEFT'],
                 ['__NODE_MAP__ m', 'm.method=w.method AND m.module=w.module AND m.controller=w.controller AND m.action=w.action', 'LEFT'],
                 ['__NODE_MAP__ md', 'md.method="ALL" AND md.module=w.module AND md.controller=w.controller AND md.action=w.action', 'LEFT'],
             ])

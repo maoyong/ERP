@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>table</title>
+	<link rel="stylesheet" href="__static__/css/printf.css">
+</head>
+<body>
+<div class="main">
+<div class="tab_head">
+	<h1>武汉卓上实验设备有限公司采购入库单</h1>
+    <p>收货仓库：{$info.position}<p>
+    <p>录单日期：{$info.put_time}<p>	
+    <p>单据编号：{$info.compact_no}<p>
+    <p>供应商名称：{$info.suppliers.client_name}<p>
+    <p>联系人：{$info.suppliers.link_name}<p>
+    <p>联系电话：{$info.suppliers.link_tel}<p>
+    <p>联系地址：{$info.suppliers.address}<p>
+    <p>摘要：{$info.remark}<p>
+    <div style="clear: both;"></div>
+</div>
+<div class="tab_con">
+	<table>
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>商品名称</th>
+				<th>品牌</th>
+				<th>规格</th>
+				<th>单位</th>
+				<th>数量</th>
+				<th>单价</th>
+				<th>金额</th>
+			</tr>
+		</thead>
+		<tbody>
+		{assign name='all_money' value='0'}
+			{volist name='info.goods' id='goods' key='k'}
+			{php}$all_money += $goods['total_price']{/php}
+			<tr>
+				<td>{$k}</td>
+				<td>{$goods.name}</td>
+				<td>{$goods.brand}</td>
+				<td>{$goods.model}</td>
+				<td>{$goods.uname}</td>
+				<td>{$goods.num}</td>
+				<td>{$goods.tax_price}</td>
+				<td>{$goods.total_price}</td>
+			</tr>
+			{/volist}
+			<tr>
+				<td>总计大写</td>
+				<td colspan="4">{$all_money|num_to_rmb}</td>
+				<td>{$info.total_num}</td>
+                <td>总计</td>
+                <td>{$all_money}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="tab_footer">
+	<!-- <p style="width: 66%">地址：</p>
+	<p>电话：</p> -->
+	<p>制单人：{$info.user_info.username}</p>
+	<p>经手人：{$info.order_no ? $info.handler.username : ''}</p>
+	<p>打印日期：{php}echo date('Y-m-d', time());{/php}</p>
+	<div style="clear: both;"></div>
+</div>
+</div>		
+</body>
+</html>

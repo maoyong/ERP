@@ -29,7 +29,7 @@ trait Controller
         if (method_exists($this, 'filter')) {
             $this->filter($map);
         }
-
+        
         $this->datalist($model, $map);
         return $this->view->fetch();
     }

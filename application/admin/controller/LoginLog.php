@@ -9,7 +9,7 @@ namespace app\admin\controller;
 
 use app\admin\Controller;
 use app\common\model\LoginLog as ModelLoginLog;
-use app\common\model\User as ModelAdminUser;
+use app\common\model\User as ModelUser;
 
 class LoginLog extends Controller
 {

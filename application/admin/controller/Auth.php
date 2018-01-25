@@ -18,6 +18,8 @@ class auth extends Controller
         'edit' => '修改',
         'delete' => '作废',
         'check' => '审核',
+        'printf' => '打印',
+        'store' => '商品'
     ];
 
     function index(){
@@ -27,8 +29,9 @@ class auth extends Controller
         return $this->view->fetch('index',['auth'=>$auth]);
     }
     function showAdd(){
-    	$auth = Db::name('auth_rule')->where('pid', 0)->order(['sort' => 'DESC', 'id' => 'ASC'])->select();
+    	$auth = Db::name('auth_rule')->where('icon', '<', 3)->order(['sort' => 'DESC', 'id' => 'ASC'])->select();
         $auth = array2Level($auth);
+        $this->view->assign('operates', $this->operates);
     	return  $this->view->fetch('add',['auth'=>$auth]);
     }
     function add(){
@@ -41,10 +44,14 @@ class auth extends Controller
             $inserts = [];
             $module = $this->request->module();
             $name = strtolower($post['name']);
-            if ($post['pid'] > 0){
-                $post['name'] = $module . '/' . $post['name'] .'/index';
-            }else{
-                $post['name'] = $module . '/' . $post['name'] .'/default';
+            if (stripos($name, '/')  === false) {
+                if ($post['pid'] > 0){
+                    $post['name'] = $module . '/' . $post['name'] .'/index';
+                    $post['operate'][] = 'recyclebin';
+                    $this->operates['recyclebin'] = '回收站';
+                }else{
+                    $post['name'] = $module . '/' . $post['name'] .'/default';
+                }
             }
             $operate = !empty($post['operate']) ?  $post['operate']: [];
             unset($post['operate']);

@@ -62,7 +62,7 @@ header {
 		<div class="layui-form-item">
 		    <label class="layui-form-label">密&nbsp;&nbsp;&nbsp;码</label>
 		    <div class="layui-input-block">
-		    <input type="password" id="password"  name="password" lay-verify="pass" placeholder="留空为不修改" autocomplete="off" class="layui-input">
+		    <input type="password" id="password"  name="password"  placeholder="留空为不修改" autocomplete="off" class="layui-input">
 		    </div>
 	  	</div>
 
@@ -140,7 +140,6 @@ header {
 		      cache:false,          
 		      async:false,          //同步返回
 		      success:function(data){
-		      	console.log(data);
 		      	if(data.code==0){
 		      		layer.msg(data.msg);
 		      	}else{

@@ -42,10 +42,9 @@
         <div class="row cl">
             <label class="form-label col-xs-3 col-sm-3">操作：</label>
             <div class="formControls col-xs-6 col-sm-6">
-                <input type="checkbox" name="operate[]"  lay-skin="primary"  title="添加" value="add" >添加
-                <input type="checkbox" name="operate[]"  lay-skin="primary"  title="修改" value="edit" >修改
-                <input type="checkbox" name="operate[]"  lay-skin="primary"  title="审核" value="check" >审核
-                <input type="checkbox" name="operate[]"  lay-skin="primary"  title="作废" value="delete" >作废
+                {foreach name='operates' id='op' key='k'}
+                <input type="checkbox" name="operate[]"  lay-skin="primary"  title="{$op}" value="{$k}" >{$op}
+                {/foreach}
             </div>
             <div class="col-xs-3 col-sm-3"></div>
         </div>

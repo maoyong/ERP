@@ -9,8 +9,8 @@ use think\Url;
 class Purchase 
 {
 	public function createOrderNo(){
-		$id = mt_rand(1, 100000000);
-		return 'CGD' . date('Ymd') . sprintf('%08d', $id);
+		$id = Db::name('put')->where("FROM_UNIXTIME(create_time, '%Y-%m')", date('Y-m', time()))->count('id');
+        return 'CGD' . date('Ym') . sprintf('%06d', ++$id);
 	}
 
 
@@ -19,7 +19,7 @@ class Purchase
         try {
             $id = Db::name("purchase")->insertGetId($data['base_info']);
             if ($id < 0) {
-            	throw new Exception('操作失败！');
+            	throw new \Exception('操作失败！');
             }
             if (isset($data['goods_info'])) {
             	foreach ($data['goods_info'] as $key => &$value) {
@@ -39,4 +39,24 @@ class Purchase
             return $e->getMessage();
         }
 	}
+
+    public function deletePurchase($id){
+        Db::startTrans();
+        try {
+            $info = Db::name('purchase')->field('order_no,status')->where('id', $id)->find();
+            if ($info['status'] == 1 && !\org\Auth::AccessCheck('check', UID)) {
+                throw new \Exception('审核通过了，不能删除！');
+            }
+            Db::name('purchase')->update(['isdelete' => 1, 'id' => $id]);
+            // 提交事务
+            Db::commit();
+
+            return true;
+        } catch (\Exception $e) {
+            // 回滚事务
+            Db::rollback();
+
+            return $e->getMessage();
+        }
+    }
 }

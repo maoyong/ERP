@@ -1,0 +1,9 @@
+<td><input type="checkbox" name="id[]" value="{$vo.id}"></td>
+<td>{$vo.id}</td>
+<td>{$vo.order_no}</td>
+<td>{$vo.compact_no}</td>
+<td>{if condition="$vo['put_type'] eq 0"}销售合同{else/}其他出库{/if}</td>
+<td>{$vo.client_name}</td>
+<td>{$vo.position}</td>
+<td>{$vo.put_time}</td>
+<td>{$vo.status|get_status=false}</td>
